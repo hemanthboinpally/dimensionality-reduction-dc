@@ -160,3 +160,59 @@ Dimensionality reduced from 6 to 4.
 
 
 """
+
+###############
+
+"""
+5) Removing Features with Missing Values
+
+.isna()
+.sum()
+/len(df)
+
+
+"""
+
+# Create a boolean mask on whether each feature less than 50% missing values.
+mask = school_df.isna().sum() / len(school_df) < 0.5
+
+# Create a reduced dataset by applying the mask
+reduced_df = school_df.loc[:,mask]
+
+print(school_df.shape)
+print(reduced_df.shape)
+
+"""
+city            0
+zipcode         0
+csp_sch_id      0
+sch_id          0
+sch_name        0
+sch_label       0
+sch_type        0
+shared        115
+complex       129
+label           0
+tlt             0
+pl              0
+
+
+
+zipcode       0.000000
+csp_sch_id    0.000000
+sch_id        0.000000
+sch_name      0.000000
+sch_label     0.000000
+sch_type      0.000000
+shared        0.877863
+complex       0.984733
+label         0.000000
+tlt           0.000000
+
+(131, 21)
+(131, 19)
+
+
+
+"""
+
