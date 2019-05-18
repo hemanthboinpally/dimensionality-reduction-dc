@@ -99,3 +99,46 @@ sns.pairplot(ansur_df_2, hue='Gender', diag_kind='hist')
 
 # Show the plot
 plt.show()
+
+
+###########################
+
+"""
+t-SNE visualization of high-dimensional data
+
+Fitting t-SNE to the ANSUR data
+t-SNE is a great technique for visual exploration of high dimensional datasets. In this exercise, you'll apply it to 
+the ANSUR dataset. You'll remove non-numeric columns from the pre-loaded dataset df and fit TSNE to his numeric dataset
+
+"""
+
+
+# Non-numerical columns in the dataset
+non_numeric = ['Branch', 'Gender', 'Component']
+
+# Drop the non-numerical columns from df
+df_numeric = df.drop(non_numeric, axis=1)
+
+# Create a t-SNE model with learning rate 50
+m = TSNE(learning_rate=50)
+
+# Fit and transform the t-SNE model on the numeric dataset
+tsne_features = m.fit_transform(df_numeric)
+print(tsne_features)
+
+
+"""
+OUTPUT:
+
+[[-16.58397865  47.53944778]
+ [  8.19966698  34.40295792]
+ [ -1.89923191  26.82118797]
+ ...
+ [ -0.55705094   7.19647169]
+ [ 26.71787643   3.33203149]
+ [  1.1791991  -43.090065  ]]
+ 
+t-SNE reduced the more than 90 features in the dataset to just 2 which we can now plot.
+
+"""
+
