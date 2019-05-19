@@ -283,3 +283,13 @@ to_drop = [c for c in tri_df.columns if any(tri_df[c] >  0.95)]
 reduced_df = ansur_df.drop(to_drop, axis=1)
 
 print("The reduced dataframe has {} columns.".format(reduced_df.shape[1]))
+
+####################
+
+
+"""
+You're right! While the example is silly, you'll be amazed how often people misunderstand correlation vs causation.
+
+Example of why not correlated columns means the same, remove the column wisely.
+
+"""
