@@ -148,4 +148,30 @@ print("{0:.1%} accuracy on test set.".format(acc))
 {'pregnant': 0.09, 'glucose': 0.21, 'triceps': 0.11, 'insulin': 0.13, 'family': 0.12, 'age': 0.16, 'diastolic': 0.08, 'bmi': 0.09}
 77.6% accuracy on test set.
 
+The random forest model gets 78% accuracy on the test set and 'glucose' is the most important feature (0.21)
+
+But Removing less important features all at once, is not the right way. Since feature importance changes after each
+iteration, that's why we need a RFE.
+
+"""
+
+
+################
+
+"""
+5) Removing less important features from the data. 
+
+"""
+
+# Create a mask for features importances above the threshold
+mask = rf.feature_importances_ > 0.15
+
+# Apply the mask to the feature dataset X
+reduced_X = X.loc[:,mask]
+
+# prints out the selected column names
+print(reduced_X.columns)
+
+"""
+Index(['glucose', 'age'], dtype='object')
 """
