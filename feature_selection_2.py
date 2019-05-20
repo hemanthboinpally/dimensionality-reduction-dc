@@ -150,8 +150,7 @@ print("{0:.1%} accuracy on test set.".format(acc))
 
 The random forest model gets 78% accuracy on the test set and 'glucose' is the most important feature (0.21)
 
-But Removing less important features all at once, is not the right way. Since feature importance changes after each
-iteration, that's why we need a RFE.
+
 
 """
 
@@ -174,4 +173,63 @@ print(reduced_X.columns)
 
 """
 Index(['glucose', 'age'], dtype='object')
+
+But Removing less important features all at once, is not the right way. Since feature importance changes after each
+iteration, that's why we need a RFE.
+"""
+
+
+#######################
+
+"""
+6) Recursive Feature Elimination with random forests
+You'll wrap a Recursive Feature Eliminator around a random forest model to remove features step by step. 
+This method is more conservative compared to selecting features after applying a single importance threshold. Since dropping one feature can influence the relative importances of the others.
+
+You'll need these pre-loaded datasets: X, X_train, y_train.
+
+Functions and classes that have been pre-loaded for you are: RandomForestClassifier(), RFE(), train_test_split().
+
+"""
+
+# Set the feature eliminator to remove 2 features on each step
+rfe = RFE(estimator=RandomForestClassifier(random_state=0), n_features_to_select=2, step=2, verbose=1)
+
+# Fit the model to the training data
+rfe.fit(X_train, y_train)
+
+# Create a mask
+mask = rfe.support_
+
+# Apply the mask to the feature dataset X and print the result
+reduced_X = X.loc[:, mask]
+print(reduced_X.columns)
+
+
+"""
+Fitting estimator with 8 features.
+Fitting estimator with 7 features.
+Fitting estimator with 6 features.
+Fitting estimator with 5 features.
+Fitting estimator with 4 features.
+Fitting estimator with 3 features.
+Out[2]: 
+RFE(estimator=RandomForestClassifier(bootstrap=True, class_weight=None, criterion='gini',
+            max_depth=None, max_features='auto', max_leaf_nodes=None,
+            min_impurity_decrease=0.0, min_impurity_split=None,
+            min_samples_leaf=1, min_samples_split=2,
+            min_weight_fraction_leaf=0.0, n_estimators='warn', n_jobs=None,
+            oob_score=False, random_state=0, verbose=0, warm_start=False),
+  n_features_to_select=2, step=1, verbose=1)
+
+Great! Compared to the quick and dirty single threshold method from the previous
+exercise one of the selected features is different.
+
+"""
+
+
+################
+
+"""
+
 """
