@@ -262,3 +262,45 @@ Lasso(alpha=1.0, copy_X=True, fit_intercept=True, max_iter=1000,
    
    
 """
+
+
+########################
+
+"""
+7) Lasso model results
+Now that you've trained the Lasso model, you'll score its predictive capacity (R2) 
+on the test set and count how many features are ignored because their coefficient is reduced to zero.
+
+The X_test and y_test datasets have been pre-loaded for you.
+
+The Lasso() model and StandardScaler() have been instantiated as la and scaler respectively and 
+both were fitted to the training data.
+"""
+
+# Scale the test set
+X_test_std = scaler.transform(X_test)
+
+# Calculate the coefficient of determination (R squared) on the scaled test set
+r_squared = la.score(X_test_std, y_test)
+print("The model can predict {0:.1%} of the variance in the test set.".format(r_squared))
+
+# Create a list that has True values when coefficients equal 0
+zero_coef = la.coef_ == 0
+
+# Take the sum of this list
+n_ignored = np.sum(zero_coef)
+print("The model has ignored {} out of {} features.".format(n_ignored, len(la.coef_)))
+
+
+"""
+OUTPUT:
+
+The model can predict 84.7% of the variance in the test set.
+
+The model has ignored 82 out of 91 features.
+
+
+Good! We can predict almost 85% of the variance in the BMI value using just 9 out of 91 of the features.
+The R^2 could be higher though.
+
+"""
