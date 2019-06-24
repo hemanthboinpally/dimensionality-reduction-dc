@@ -148,7 +148,8 @@ t-SNE reduced the more than 90 features in the dataset to just 2 which we can no
 """
 4)  t-SNE visualisation of dimensionality
 Time to look at the results of your hard work. In this exercise, you will visualize the output of t-SNE dimensionality 
-reduction on the combined male and female Ansur dataset. You'll create 3 scatterplots of the 2 t-SNE features ('x' and 'y') which were added to the dataset df. In each scatterplot you'll color the points according to a different categorical variable.
+reduction on the combined male and female Ansur dataset. You'll create 3 scatterplots of the 2 t-SNE features ('x' and 'y')
+which were added to the dataset df. In each scatterplot you'll color the points according to a different categorical variable.
 
 seaborn has already been imported as sns and matplotlib.pyplot as plt.
 

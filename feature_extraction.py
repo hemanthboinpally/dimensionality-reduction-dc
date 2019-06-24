@@ -57,3 +57,62 @@ print(reduced_df.head())
 Great! You've calculated a new feature that is still easy to understand compared to, for instance, principal components.
 
 """
+
+
+"""
+3. Calculating Principal Components
+
+You'll visually inspect a 4 feature sample of the ANSUR dataset before and after PCA using Seaborn's pairplot().
+This will allow you to inspect the pairwise correlations between the features.
+
+The data has been pre-loaded for you as ansur_df.
+
+"""
+
+# Create a pairplot to inspect ansur_df
+sns.pairplot(ansur_df)
+
+plt.show()
+
+
+from sklearn.preprocessing import StandardScaler
+from sklearn.decomposition import PCA
+
+# Create the scaler and standardize the data
+scaler = StandardScaler()
+ansur_std = scaler.fit_transform(ansur_df)
+
+# Create the PCA instance and fit and transform the data with pca
+pca = PCA()
+pc = pca.fit_transform(ansur_std)
+
+# This changes the numpy array output back to a dataframe
+pc_df = pd.DataFrame(pc, columns=['PC 1', 'PC 2', 'PC 3', 'PC 4'])
+
+# Create a pairplot of the principal component dataframe
+sns.pairplot(pc_df)
+plt.show()
+
+"""
+4) PCA on a larger dataset
+You'll now apply PCA on a somewhat larger ANSUR datasample with 13 dimensions, once again pre-loaded as ansur_df. 
+The fitted model will be used in the next exercise. Since we are not using the principal components 
+themselves there is no need to transform the data, instead, it is sufficient to fit pca to the data.
+
+"""
+
+from sklearn.preprocessing import StandardScaler
+from sklearn.decomposition import PCA
+
+# Scale the data
+scaler = StandardScaler()
+ansur_std = scaler.fit_transform(ansur_df)
+
+# Apply PCA
+pca = PCA()
+pca.fit(ansur_std)
+
+"""
+Great! You've fitted PCA on our 13 feature datasample. Now let's see how the components explain the variance.
+
+"""
