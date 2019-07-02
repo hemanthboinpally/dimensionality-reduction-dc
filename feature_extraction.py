@@ -146,5 +146,35 @@ Cumulative Sum:
  0.97738816 0.98395496 0.99030239 0.99466254 0.99732115 0.99934732
  1.        ]
  
+Using no more than 4 principal components we can explain more than 90% of the variance in the 13 feature dataset.
  
+"""
+
+
+"""
+6) Understanding the components
+You'll apply PCA to the numeric features of the Pokemon dataset, poke_df, 
+using a pipeline to combine the feature scaling and PCA in one go. 
+You'll then interpret the meanings of the first two components.
+
+All relevant packages and classes have been pre-loaded for you (Pipeline(), StandardScaler(), PCA()).
+
+"""
+
+# Build the pipeline
+# Build the pipeline
+pipe = Pipeline([('scaler', StandardScaler()),
+        		 ('reducer', PCA(n_components=2))])
+
+# Fit it to the dataset and extract the component vectors
+pipe.fit_transform(poke_df)
+vectors = pipe.steps[1][1].components_.round(2)
+
+# Print feature effects
+print('PC 1 effects = ' + str(dict(zip(poke_df.columns, vectors[0]))))
+print('PC 2 effects = ' + str(dict(zip(poke_df.columns, vectors[1]))))
+
+"""
+PC 1 effects = {'Sp. Atk': 0.46, 'Attack': 0.44, 'HP': 0.39, 'Speed': 0.34, 'Defense': 0.36, 'Sp. Def': 0.45}
+PC 2 effects = {'Sp. Atk': -0.31, 'Attack': -0.01, 'HP': 0.08, 'Speed': -0.67, 'Defense': 0.63, 'Sp. Def': 0.24}
 """
